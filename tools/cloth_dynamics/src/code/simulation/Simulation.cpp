@@ -11,6 +11,7 @@ volatile bool Simulation::bendingEnabled = true;
 volatile bool Simulation::staticEnabled = false;
 volatile bool Simulation::contactEnabled = true;
 volatile bool Simulation::selfcollisionEnabled = true;
+volatile bool Simulation::avatarContactEnabled = true;
 volatile bool Simulation::enableConstantForcefield = false;
 
 volatile bool Simulation::windEnabled = false;
@@ -219,8 +220,9 @@ Simulation::isSelfCollision(const Particle &a, const Particle &b,
 	return info;
 }
 
-std::pair<Simulation::collisionInfoPair,
-		std::vector<std::vector<Simulation::SelfCollisionInformation>>>
+std::tuple<Simulation::collisionInfoPair,
+		std::vector<std::vector<Simulation::SelfCollisionInformation>>,
+		std::vector<std::vector<AvatarCollisionInformation>>>
 Simulation::collisionDetection(const VecXd &x_n, const VecXd &v,
 		const VecXd &x_prim, const VecXd &v_prim) {
 	timeSteptimer.tic("CollisionInitVecMap");
@@ -354,6 +356,51 @@ Simulation::collisionDetection(const VecXd &x_n, const VecXd &v,
 			}
 		}
 	}
+	struct Avatar {
+		std::shared_ptr<BVHModel<OBBRSSf>> geom;
+		Transform3f tf;
+		int idx; // Add this line
+
+		Avatar(const std::vector<Vector3f> &vertices, const std::vector<Triangle> &triangles, const Matrix3f &R, const Vector3f &T, int index) { // Modify this line
+			geom = std::make_shared<Model>();
+			geom->beginModel();
+			geom->addSubModel(vertices, triangles);
+			geom->endModel();
+
+			tf = Transform3f::Identity();
+			tf.linear() = R;
+			tf.translation() = T;
+
+			idx = index; // And this line
+		}
+
+		CollisionObjectf *getCollisionObject() {
+			return new CollisionObjectf(geom, tf);
+		}
+	};
+	std::vector<Avatar> avatars;
+	std::vector<std::vector<AvatarCollisionInformation>> avatarLayers;
+	std::vector<AvatarCollisionInformation> avatarInfos;
+	std::vector<AvatarCollisionInformation> fullAvatarCollisionArr(avatars.size());
+
+#pragma omp parallel for if (OPENMP_ENABLED)
+	for (int i = 0; i < avatars.size(); i++) {
+		const Avatar &a = avatars[i];
+		fullAvatarCollisionArr[i] = isInContactWithParticle(
+				x_n.segment(a.idx * 3, 3), v.segment(a.idx * 3, 3), x_prim, v_prim);
+	}
+
+#pragma omp parallel for if (OPENMP_ENABLED)
+	for (int i = 0; i < avatars.size(); i++) {
+		if (fullAvatarCollisionArr[i].collides) {
+			const Avatar &a = avatars[i];
+#pragma omp critical
+			{
+				fullAvatarCollisionArr[i].avatarId = a.idx;
+				avatarInfos.emplace_back(fullAvatarCollisionArr[i]);
+			}
+		}
+	}
 
 	timeSteptimer.toc();
 
@@ -364,9 +411,16 @@ Simulation::collisionDetection(const VecXd &x_n, const VecXd &v,
 	if (contactEnabled && selfcollisionEnabled) {
 		layers = contactSorting(detections, selfCollisionMap, selfCollisionTable);
 	}
+
+	// Add avatar collision sorting here
+	if (avatarContactEnabled) {
+		// FIXME: You need to implement this function
+		// avatarLayers = avatarContactSorting(avatarInfos); 
+	}
+
 	timeSteptimer.toc();
 
-	return std::make_pair(detections, layers);
+	return std::make_tuple(detections, layers, avatarLayers);
 }
 
 void checkInfoConsistency(int particleId, int otherId, int infoIdx,
@@ -662,7 +716,7 @@ Simulation::calculateDryFrictionVector(const VecXd &f,
 		return std::make_pair(r, r_prim);
 
 	std::vector<PrimitiveCollisionInformation> &infos =
-			detectionInfos.first.first;
+			std::get<0>(detectionInfos).first;
 	if (contactEnabled) {
 		for (PrimitiveCollisionInformation &info : infos) {
 			if (info.primitiveId != -1) {
@@ -681,7 +735,7 @@ Simulation::calculateDryFrictionVector(const VecXd &f,
 		if (selfcollisionEnabled) {
 			int layerCount = 0;
 			for (std::vector<SelfCollisionInformation> &selfInfos :
-					detectionInfos.second) {
+					std::get<1>(detectionInfos)) {
 				for (SelfCollisionInformation &info : selfInfos) {
 					Vec3d f_iA = f.segment(info.particleId1 * 3, 3) +
 							r.segment(info.particleId1 * 3, 3);
@@ -726,7 +780,7 @@ Simulation::calculatedr_df(const completeCollisionInfo &infos,
 	if (contactEnabled) {
 		// primitive collisions
 
-		for (const PrimitiveCollisionInformation &info : infos.first.first) {
+		for (const PrimitiveCollisionInformation &info : std::get<0>(infos).first) {
 			if (info.primitiveId != -1) {
 				int pIdx = info.particleId;
 				Primitive *prim = primitives[info.primitiveId];
@@ -745,8 +799,8 @@ Simulation::calculatedr_df(const completeCollisionInfo &infos,
 			int layerCount = 0;
 			double rho = sceneConfig.fabric.density;
 			for (const std::vector<SelfCollisionInformation> &selfInfos :
-					infos.second) { // has to use second, because 1. layer matters 2.
-									// info.d and info.r is only updated in second
+					std::get<1>(infos)) { // has to use second, because 1. layer matters 2.
+				// info.d and info.r is only updated in second
 				layerCount++;
 				SpMat dr_df_last = dr_df;
 				TripleVector dr_df_delta;
@@ -1100,8 +1154,9 @@ void Simulation::step() {
 
 	stepPrimitives();
 
-	std::pair<collisionInfoPair,
-			std::vector<std::vector<SelfCollisionInformation>>>
+	std::tuple<Simulation::collisionInfoPair,
+			std::vector<std::vector<Simulation::SelfCollisionInformation>>,
+			std::vector<std::vector<AvatarCollisionInformation>>>
 			detectionInfos;
 
 	VecXd x_new(3 * particles.size());

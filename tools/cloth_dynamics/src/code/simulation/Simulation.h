@@ -19,11 +19,18 @@
 #include "Spring.h"
 #include "Triangle.h"
 #include "TriangleBending.h"
+#include "fcl/math/bv/utility.h"
+#include "fcl/narrowphase/collision.h"
+#include "fcl/narrowphase/continuous_collision.h"
+#include "fcl/narrowphase/detail/gjk_solver_indep.h"
+#include "fcl/narrowphase/detail/gjk_solver_libccd.h"
+#include "fcl/narrowphase/detail/traversal/collision_node.h"
 #include <Eigen/Core>
 #include <Eigen/Sparse>
 #include <iomanip>
 #include <memory>
 #include <set>
+#include <tuple>
 #include <vector>
 
 class Simulation {
@@ -58,11 +65,24 @@ public:
 		CollisionType type;
 	};
 
+	struct AvatarCollisionInformation {
+		int avatarId;
+		int particleId;
+		Vec3d normal;
+		Vec3d d;
+		Vec3d r;
+		Vec3d v_out;
+		bool collides;
+		double dist;
+		CollisionType type;
+	};
+
 	typedef std::pair<std::vector<PrimitiveCollisionInformation>,
 			std::vector<SelfCollisionInformation>>
 			collisionInfoPair;
-	typedef std::pair<collisionInfoPair,
-			std::vector<std::vector<SelfCollisionInformation>>>
+	typedef std::tuple<Simulation::collisionInfoPair,
+			std::vector<std::vector<Simulation::SelfCollisionInformation>>,
+			std::vector<std::vector<AvatarCollisionInformation>>>
 			completeCollisionInfo;
 	struct ForwardInformation {
 		VecXd x;
@@ -317,7 +337,7 @@ public:
 	SceneConfiguration sceneConfig;
 	bool backwardGradientForceDirectSolver = false;
 	static volatile bool gravityEnabled, windEnabled, staticEnabled,
-			contactEnabled, selfcollisionEnabled, enableConstantForcefield;
+			contactEnabled, selfcollisionEnabled, avatarContactEnabled, enableConstantForcefield;
 	static volatile bool bendingEnabled;
 
 	bool debugSkipfixedpointstep = false;
@@ -530,10 +550,12 @@ public:
 
 	void setWindAncCollision(bool windEnable, bool collisionEnable,
 			bool selfCollisionEnable,
+			bool avatarContactEnabled = true,
 			bool enableConstantForcefield = false) {
 		Simulation::windEnabled = windEnable;
 		Simulation::contactEnabled = collisionEnable;
 		Simulation::selfcollisionEnabled = selfCollisionEnable;
+		Simulation::avatarContactEnabled = avatarContactEnabled;
 		Simulation::enableConstantForcefield = enableConstantForcefield;
 	}
 
@@ -912,8 +934,9 @@ public:
 
 	void updateCurrentPosVelocityVec();
 
-	std::pair<collisionInfoPair,
-			std::vector<std::vector<SelfCollisionInformation>>>
+	typedef std::tuple<Simulation::collisionInfoPair,
+			std::vector<std::vector<Simulation::SelfCollisionInformation>>,
+			std::vector<std::vector<AvatarCollisionInformation>>>
 	collisionDetection(const VecXd &x_n, const VecXd &v, const VecXd &x_prim,
 			const VecXd &v_prim);
 
