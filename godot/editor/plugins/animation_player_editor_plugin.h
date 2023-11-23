@@ -51,7 +51,6 @@ class AnimationPlayerEditor : public VBoxContainer {
 
 	AnimationPlayerEditorPlugin *plugin = nullptr;
 	AnimationMixer *original_node = nullptr; // For pinned mark in SceneTree.
-	AnimationMixer *selected_node = nullptr; // The last edited node, irrespective of pinning.
 	AnimationPlayer *player = nullptr; // For AnimationPlayerEditor, could be dummy.
 	bool is_dummy = false;
 
@@ -197,7 +196,7 @@ class AnimationPlayerEditor : public VBoxContainer {
 	Ref<Animation> _animation_clone(const Ref<Animation> p_anim);
 	void _animation_resource_edit();
 	void _scale_changed(const String &p_scale);
-	void _seek_value_changed(float p_value, bool p_set = false, bool p_timeline_only = false);
+	void _seek_value_changed(float p_value, bool p_timeline_only = false);
 	void _blend_editor_next_changed(const int p_idx);
 
 	void _edit_animation_blend();
@@ -214,7 +213,7 @@ class AnimationPlayerEditor : public VBoxContainer {
 	void _animation_player_changed(Object *p_pl);
 	void _animation_libraries_updated();
 
-	void _animation_key_editor_seek(float p_pos, bool p_drag, bool p_timeline_only = false);
+	void _animation_key_editor_seek(float p_pos, bool p_timeline_only = false);
 	void _animation_key_editor_anim_len_changed(float p_len);
 
 	virtual void shortcut_input(const Ref<InputEvent> &p_ev) override;
@@ -248,22 +247,16 @@ protected:
 	static void _bind_methods();
 
 public:
-	AnimationMixer *get_selected_node() { return selected_node; }
-	void set_selected_node(AnimationMixer *p_selected_node) { selected_node = p_selected_node; }
-
 	AnimationMixer *get_editing_node() const;
 	AnimationPlayer *get_player() const;
 	AnimationMixer *fetch_mixer_for_library() const;
 
 	static AnimationPlayerEditor *get_singleton() { return singleton; }
 
-	Button *get_pin() const { return pin; }
 	bool is_pinned() const { return pin->is_pressed(); }
-	void unpin(Node *n) {
-		if (n == original_node) {
-			pin->set_pressed(false);
-			_pin_pressed();
-		}
+	void unpin() {
+		pin->set_pressed(false);
+		_pin_pressed();
 	}
 	AnimationTrackEditor *get_track_editor() { return track_editor; }
 	Dictionary get_state() const;
@@ -291,14 +284,11 @@ class AnimationPlayerEditorPlugin : public EditorPlugin {
 	void _clear_dummy_player();
 
 protected:
-	bool animation_tree_selected = false;
-
 	void _notification(int p_what);
 
 	void _property_keyed(const String &p_keyed, const Variant &p_value, bool p_advance);
 	void _transform_key_request(Object *sp, const String &p_sub, const Transform3D &p_key);
 	void _update_keying();
-	void _pin_toggled();
 
 public:
 	virtual Dictionary get_state() const override { return anim_editor->get_state(); }

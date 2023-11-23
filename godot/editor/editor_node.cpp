@@ -1047,11 +1047,6 @@ void EditorNode::_sources_changed(bool p_exist) {
 		// loading textures, as they are now properly imported.
 		RenderingServer::get_singleton()->global_shader_parameters_load_settings(true);
 
-		// Start preview thread now that it's safe.
-		if (!singleton->cmdline_export_mode) {
-			EditorResourcePreview::get_singleton()->start();
-		}
-
 		_load_editor_layout();
 
 		if (!defer_load_scene.is_empty()) {
@@ -1065,6 +1060,11 @@ void EditorNode::_sources_changed(bool p_exist) {
 
 		if (SurfaceUpgradeTool::get_singleton()->is_show_requested()) {
 			SurfaceUpgradeTool::get_singleton()->show_popup();
+		}
+
+		// Start preview thread now that it's safe.
+		if (!singleton->cmdline_export_mode) {
+			EditorResourcePreview::get_singleton()->start();
 		}
 	}
 }
@@ -1761,6 +1761,10 @@ static void _reset_animation_mixers(Node *p_node, List<Pair<AnimationMixer *, Re
 }
 
 void EditorNode::_save_scene(String p_file, int idx) {
+	if (!saving_scene.is_empty() && saving_scene == p_file) {
+		return;
+	}
+
 	Node *scene = editor_data.get_edited_scene_root(idx);
 
 	if (!scene) {
@@ -1817,7 +1821,9 @@ void EditorNode::_save_scene(String p_file, int idx) {
 	emit_signal(SNAME("scene_saved"), p_file);
 
 	_save_external_resources();
+	saving_scene = p_file; // Some editors may save scenes of built-in resources as external data, so avoid saving this scene again.
 	editor_data.save_editor_external_data();
+	saving_scene = "";
 
 	for (Pair<AnimationMixer *, Ref<AnimatedValuesBackup>> &E : anim_backups) {
 		E.first->restore(E.second);
@@ -3049,7 +3055,7 @@ void EditorNode::_tool_menu_option(int p_idx) {
 			orphan_resources->show();
 		} break;
 		case TOOLS_SURFACE_UPGRADE: {
-			surface_upgrade_dialog->popup_centered(Size2(750 * EDSCALE, 0));
+			surface_upgrade_dialog->popup_on_demand();
 		} break;
 		case TOOLS_CUSTOM: {
 			if (tool_menu->get_item_submenu(p_idx) == "") {
@@ -6977,6 +6983,10 @@ EditorNode::EditorNode() {
 		import_wav.instantiate();
 		ResourceFormatImporter::get_singleton()->add_importer(import_wav);
 
+		Ref<ResourceImporterOBJ> import_obj;
+		import_obj.instantiate();
+		ResourceFormatImporter::get_singleton()->add_importer(import_obj);
+
 		Ref<ResourceImporterShaderFile> import_shader_file;
 		import_shader_file.instantiate();
 		ResourceFormatImporter::get_singleton()->add_importer(import_shader_file);
@@ -7000,10 +7010,6 @@ EditorNode::EditorNode() {
 			import_escn.instantiate();
 			ResourceImporterScene::add_importer(import_escn);
 		}
-
-		Ref<ResourceImporterOBJ> import_obj;
-		import_obj.instantiate();
-		ResourceFormatImporter::get_singleton()->add_importer(import_obj);
 
 		Ref<ResourceImporterBitMap> import_bitmap;
 		import_bitmap.instantiate();
@@ -7060,7 +7066,7 @@ EditorNode::EditorNode() {
 	// The lowest value is equal to the minimum float step for 32-bit floats.
 	// The step must be set manually, as changing this setting should not change the step here.
 	EditorSettings::get_singleton()->add_property_hint(PropertyInfo(Variant::FLOAT, "interface/inspector/default_float_step", PROPERTY_HINT_RANGE, "0.0000001,1,0.0000001"));
-	EDITOR_DEF_RST("interface/inspector/disable_folding", true);
+	EDITOR_DEF_RST("interface/inspector/disable_folding", false);
 	EDITOR_DEF_RST("interface/inspector/auto_unfold_foreign_scenes", true);
 	EDITOR_DEF("interface/inspector/horizontal_vector2_editing", false);
 	EDITOR_DEF("interface/inspector/horizontal_vector_types_editing", true);

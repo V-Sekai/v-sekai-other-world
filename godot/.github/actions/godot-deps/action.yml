@@ -1,5 +1,5 @@
-name: Setup python and scons
-description: Setup python, install the pip version of scons.
+name: Setup python, scons and rust
+description: Setup python, install the pip version of scons and setup golang.
 inputs:
   python-version:
     description: The python version to use.
@@ -25,3 +25,10 @@ runs:
         python -c "import sys; print(sys.version)"
         python -m pip install scons==4.4.0
         scons --version
+
+    - name: Install latest rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        components: rustfmt, clippy

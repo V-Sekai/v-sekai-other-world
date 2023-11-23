@@ -5,8 +5,8 @@
 ;
 [subrepo]
 	remote = https://github.com/V-Sekai/godot.git
-	branch = groups-staging-4.2
-	commit = 3832011ce2dd096fb9134e139e714a22eb23fea8
-	parent = 99c1b44dbbd08a3060348b6a3a376840756ac7ab
+	branch = vsk-mvsqlite-4.2
+	commit = a2ca91ae4c584213cfe479ae5bfb61b5d10251d2
+	parent = ffe1dccc295785525ede250f9e85b6b417d80589
 	method = merge
 	cmdver = 0.4.6

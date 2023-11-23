@@ -743,7 +743,7 @@ void Node3DEditorViewport::_select_clicked(bool p_allow_locked) {
 				editor_selection->add_node(selected);
 			}
 		} else {
-			if (editor_selection->get_full_selected_node_list().size() != 1 || !editor_selection->is_selected(selected)) {
+			if (!editor_selection->is_selected(selected)) {
 				editor_selection->clear();
 				editor_selection->add_node(selected);
 				EditorNode::get_singleton()->edit_node(selected);
@@ -809,36 +809,10 @@ ObjectID Node3DEditorViewport::_select_ray(const Point2 &p_pos) const {
 				item = Object::cast_to<Node>(spat);
 				if (item != edited_scene) {
 					item = edited_scene->get_deepest_editable_node(item);
-					if (item->get_owner() != edited_scene) {
-						// Get the highest level owner for this node
-						Node *root_item_owner = item;
-						while (root_item_owner->get_owner() != edited_scene) {
-							root_item_owner = root_item_owner->get_owner();
-						}
-
-						// For the existing list of selections, check if we have the root owner
-						// of the selected item
-						bool selection_valid = false;
-						List<Node *> selected_node_list = editor_selection->get_selected_node_list();
-						for (int k = 0; k < selected_node_list.size(); k++) {
-							if (selected_node_list[k] == root_item_owner) {
-								selection_valid = true;
-								break;
-							}
-						}
-
-						// If the root owner of the the item was not selected, make that
-						// the selected item instead
-						if (!selection_valid) {
-							item = root_item_owner;
-						}
-					}
 				}
 
-				if (item) {
-					closest = item->get_instance_id();
-					closest_dist = dist;
-				}
+				closest = item->get_instance_id();
+				closest_dist = dist;
 			}
 		}
 	}
@@ -1058,18 +1032,6 @@ void Node3DEditorViewport::_select_region() {
 		Node *item = Object::cast_to<Node>(sp);
 		if (item != edited_scene) {
 			item = edited_scene->get_deepest_editable_node(item);
-		}
-
-		// Get the highest level node if part of an editable instance
-		while (item->get_owner() != edited_scene) {
-			item = item->get_owner();
-			if (!item) {
-				break;
-			}
-		}
-
-		if (!item) {
-			continue;
 		}
 
 		// Replace the node by the group if grouped
@@ -2907,9 +2869,7 @@ void Node3DEditorViewport::_notification(int p_what) {
 
 				text += "\n";
 				text += vformat(TTR("Objects: %d\n"), viewport->get_render_info(Viewport::RENDER_INFO_TYPE_VISIBLE, Viewport::RENDER_INFO_OBJECTS_IN_FRAME));
-
-				int vertex_indices = viewport->get_render_info(Viewport::RENDER_INFO_TYPE_VISIBLE, Viewport::RENDER_INFO_PRIMITIVES_IN_FRAME);
-				text += vformat(TTR("Vertex Indices: %d\n"), vertex_indices);
+				text += vformat(TTR("Primitives: %d\n"), viewport->get_render_info(Viewport::RENDER_INFO_TYPE_VISIBLE, Viewport::RENDER_INFO_PRIMITIVES_IN_FRAME));
 				text += vformat(TTR("Draw Calls: %d"), viewport->get_render_info(Viewport::RENDER_INFO_TYPE_VISIBLE, Viewport::RENDER_INFO_DRAW_CALLS_IN_FRAME));
 
 				info_label->set_text(text);
@@ -5166,9 +5126,7 @@ Node3DEditorViewport::Node3DEditorViewport(Node3DEditor *p_spatial_editor, int p
 	view_menu->get_popup()->add_check_shortcut(ED_SHORTCUT("spatial_editor/view_environment", TTR("View Environment")), VIEW_ENVIRONMENT);
 	view_menu->get_popup()->add_check_shortcut(ED_SHORTCUT("spatial_editor/view_gizmos", TTR("View Gizmos")), VIEW_GIZMOS);
 	view_menu->get_popup()->add_check_shortcut(ED_SHORTCUT("spatial_editor/view_information", TTR("View Information")), VIEW_INFORMATION);
-	view_menu->get_popup()->set_item_checked(view_menu->get_popup()->get_item_index(VIEW_INFORMATION), true);
 	view_menu->get_popup()->add_check_shortcut(ED_SHORTCUT("spatial_editor/view_fps", TTR("View Frame Time")), VIEW_FRAME_TIME);
-	view_menu->get_popup()->set_item_checked(view_menu->get_popup()->get_item_index(VIEW_FRAME_TIME), true);
 	view_menu->get_popup()->set_item_checked(view_menu->get_popup()->get_item_index(VIEW_ENVIRONMENT), true);
 	view_menu->get_popup()->add_separator();
 	view_menu->get_popup()->add_check_shortcut(ED_SHORTCUT("spatial_editor/view_half_resolution", TTR("Half Resolution")), VIEW_HALF_RESOLUTION);
@@ -7478,7 +7436,7 @@ void Node3DEditor::_snap_selected_nodes_to_floor() {
 			ray_params.to = to;
 			ray_params.exclude = excluded;
 
-			if (ss && ss->intersect_ray(ray_params, result)) {
+			if (ss->intersect_ray(ray_params, result)) {
 				snapped_to_floor = true;
 			}
 		}

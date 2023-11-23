@@ -586,6 +586,7 @@ void RendererSceneRenderRD::_render_buffers_post_process_and_tonemap(const Rende
 
 			if (dest_is_msaa_2d) {
 				dest_fb = FramebufferCacheRD::get_singleton()->get_cache(texture_storage->render_target_get_rd_texture_msaa(render_target));
+				texture_storage->render_target_set_msaa_needs_resolve(render_target, true); // Make sure this gets resolved.
 			} else {
 				dest_fb = texture_storage->render_target_get_rd_framebuffer(render_target);
 			}
@@ -611,6 +612,8 @@ void RendererSceneRenderRD::_render_buffers_post_process_and_tonemap(const Rende
 			RID source_texture = texture_storage->render_target_get_rd_texture(render_target);
 			RID dest_fb = FramebufferCacheRD::get_singleton()->get_cache(texture_storage->render_target_get_rd_texture_msaa(render_target));
 			copy_effects->copy_to_fb_rect(source_texture, dest_fb, Rect2i(Point2i(), rb->get_target_size()));
+
+			texture_storage->render_target_set_msaa_needs_resolve(render_target, true); // Make sure this gets resolved.
 		}
 
 		RD::get_singleton()->draw_command_end_label();
@@ -1035,7 +1038,6 @@ void RendererSceneRenderRD::render_scene(const Ref<RenderSceneBuffers> &p_render
 		// degradation visibility. Conversely, allow upwards scaling, too, for increased mesh detail at high res.
 		const float scaling_3d_scale = GLOBAL_GET("rendering/scaling_3d/scale");
 		scene_data.lod_distance_multiplier = lod_distance_multiplier * (1.0 / scaling_3d_scale);
-		scene_data.lod_camera_plane = Plane(-p_camera_data->main_transform.basis.get_column(Vector3::AXIS_Z), p_camera_data->main_transform.get_origin());
 
 		if (get_debug_draw_mode() == RS::VIEWPORT_DEBUG_DRAW_DISABLE_LOD) {
 			scene_data.screen_mesh_lod_threshold = 0.0;

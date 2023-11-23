@@ -1116,6 +1116,7 @@ void RendererCanvasRenderRD::_render_items(RID p_to_render_target, int p_item_co
 		fb_uniform_set = texture_storage->render_target_get_backbuffer_uniform_set(p_to_render_target);
 	} else {
 		framebuffer = texture_storage->render_target_get_rd_framebuffer(p_to_render_target);
+		texture_storage->render_target_set_msaa_needs_resolve(p_to_render_target, false); // If MSAA is enabled, our framebuffer will be resolved!
 
 		if (texture_storage->render_target_is_clear_requested(p_to_render_target)) {
 			clear = true;
@@ -2577,22 +2578,14 @@ RendererCanvasRenderRD::RendererCanvasRenderRD() {
 		//pipelines
 		Vector<RD::VertexAttribute> vf;
 		RD::VertexAttribute vd;
-#ifdef MACOS_ENABLED
-		vd.format = RD::DATA_FORMAT_R32G32B32_SFLOAT;
-#else
 		vd.format = sizeof(real_t) == sizeof(float) ? RD::DATA_FORMAT_R32G32B32_SFLOAT : RD::DATA_FORMAT_R64G64B64_SFLOAT;
-#endif
 		vd.location = 0;
 		vd.offset = 0;
 		vd.stride = sizeof(real_t) * 3;
 		vf.push_back(vd);
 		shadow_render.vertex_format = RD::get_singleton()->vertex_format_create(vf);
 
-#ifdef MACOS_ENABLED
-		vd.format = RD::DATA_FORMAT_R32G32_SFLOAT;
-#else
 		vd.format = sizeof(real_t) == sizeof(float) ? RD::DATA_FORMAT_R32G32_SFLOAT : RD::DATA_FORMAT_R64G64_SFLOAT;
-#endif
 		vd.stride = sizeof(real_t) * 2;
 
 		vf.write[0] = vd;
