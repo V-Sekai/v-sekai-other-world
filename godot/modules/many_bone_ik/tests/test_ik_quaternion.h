@@ -79,7 +79,7 @@ auto quaternion_operator_negq1_negq2 = [](const Quaternion &q1, const Quaternion
 };
 
 auto quaternion_operator_applyTo = [](const Quaternion &q1, const Quaternion &q2) -> Quaternion {
-	return (IKKusudama3D::applyTo(q1, q2)).normalized();
+	return (IKKusudama3D::_apply_to(q1, q2)).normalized();
 };
 
 TEST_CASE("[Modules][ManyBoneIK] Match EWBIK") {

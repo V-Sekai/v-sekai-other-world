@@ -115,7 +115,7 @@ public:
 			Quaternion &r_swing,
 			Quaternion &r_twist);
 
-	static Quaternion applyTo(Quaternion p_thisQ, Quaternion p_target);
+	static Quaternion _apply_to(Quaternion p_thisQ, Quaternion p_target);
 
 public:
 	double angle_to_twist_center(Ref<IKNode3D> bone_direction, Ref<IKNode3D> limiting_axes);

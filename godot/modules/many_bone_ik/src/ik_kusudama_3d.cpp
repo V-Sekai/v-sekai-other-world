@@ -193,14 +193,14 @@ void IKKusudama3D::set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKN
 	to_set->set_transform(Transform3D(rotation, ik_transform.origin));
 }
 
-Quaternion IKKusudama3D::applyTo(Quaternion thisQ, Quaternion target) {
+Quaternion IKKusudama3D::_apply_to(Quaternion thisQ, Quaternion target) {
 	Quaternion r = target;
 	Quaternion tr = thisQ;
-	Quaternion result = Quaternion(
-			r.w * tr.w - (r.x * tr.x + r.y * tr.y + r.z * tr.z),
+	Quaternion result = Quaternion(			
 			r.x * tr.w + r.w * tr.x + (r.y * tr.z - r.z * tr.y),
 			r.y * tr.w + r.w * tr.y + (r.z * tr.x - r.x * tr.z),
-			r.z * tr.w + r.w * tr.z + (r.x * tr.y - r.y * tr.x));
+			r.z * tr.w + r.w * tr.z + (r.x * tr.y - r.y * tr.x),
+			r.w * tr.w - (r.x * tr.x + r.y * tr.y + r.z * tr.z));
 }
 
 void IKKusudama3D::get_swing_twist(
