@@ -1,0 +1,403 @@
+===============================================================================
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0:
+TEST CASE:  [Modules][ManyBoneIK] Match EWBIK
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.06234382635018, 0.37221637656611, 0.88723453303868, -0.26529813364525) )
+  logged: ( -0.06234382635018, 0.37221637656611, 0.88723453303868, -0.26529813364525)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.01905029061666, 0.91038734694018, 0.3333812575106, -0.24431312305991) )
+  logged: ( 0.01905029061666, 0.91038734694018, 0.3333812575106, -0.24431312305991)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.11717244593702, 0.59615928395626, 0.71948697099445, -0.33645686890764) )
+  logged: ( 0.11717244593702, 0.59615928395626, 0.71948697099445, -0.33645686890764)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.02131292311005, 0.0856830268547, 0.992933057433, -0.07929767760966) )
+  logged: ( -0.02131292311005, 0.0856830268547, 0.992933057433, -0.07929767760966)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.00015441002602, 0.30189528824241, 0.92576029778783, -0.22765562179392) )
+  logged: ( 0.00015441002602, 0.30189528824241, 0.92576029778783, -0.22765562179392)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.15447163688086, 0.94472951919249, 0.21367098330795, -0.19485728074127) )
+  logged: ( -0.15447163688086, 0.94472951919249, 0.21367098330795, -0.19485728074127)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.2054056921832, 0.93257312044641, 0.21089707107478, -0.20889782682372) )
+  logged: ( -0.2054056921832, 0.93257312044641, 0.21089707107478, -0.20889782682372)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.45044506477336, 0.50335214688765, 0.57891100548128, -0.45672519919265) )
+  logged: ( 0.45044506477336, 0.50335214688765, 0.57891100548128, -0.45672519919265)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.2605683301418, 0.61461135459405, 0.64670666773817, -0.36895462327254) )
+  logged: ( 0.2605683301418, 0.61461135459405, 0.64670666773817, -0.36895462327254)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.16156377800032, 0.52413892297013, 0.76757573659044, -0.33166703734863) )
+  logged: ( 0.16156377800032, 0.52413892297013, 0.76757573659044, -0.33166703734863)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.27425722451605, 0.53468854266727, 0.71082388090142, -0.36554144427321) )
+  logged: ( 0.27425722451605, 0.53468854266727, 0.71082388090142, -0.36554144427321)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.00167075424883, 0.90026530369098, 0.35363038122159, -0.25389987205098) )
+  logged: ( 0.00167075424883, 0.90026530369098, 0.35363038122159, -0.25389987205098)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.28474177225209, 0.35998393552029, 0.82912756387717, -0.31918830198046) )
+  logged: ( 0.28474177225209, 0.35998393552029, 0.82912756387717, -0.31918830198046)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.05210924919511, 0.94950926550717, 0.24073612672248, -0.19432678187789) )
+  logged: ( 0.05210924919511, 0.94950926550717, 0.24073612672248, -0.19432678187789)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.09985095925808, 0.96896505595489, 0.16768440311985, -0.15171831538716) )
+  logged: ( -0.09985095925808, 0.96896505595489, 0.16768440311985, -0.15171831538716)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.32808181004207, 0.44636425119372, 0.74602988668725, -0.36954118761674) )
+  logged: ( 0.32808181004207, 0.44636425119372, 0.74602988668725, -0.36954118761674)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.46955823649991, 0.48175434857408, 0.5708236000688, -0.47073158781789) )
+  logged: ( 0.46955823649991, 0.48175434857408, 0.5708236000688, -0.47073158781789)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.03895127503676, 0.97887539647879, 0.15103554312796, -0.13218933789662) )
+  logged: ( 0.03895127503676, 0.97887539647879, 0.15103554312796, -0.13218933789662)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.06228631744958, 0.92079485384794, 0.30646739768721, -0.23309866138728) )
+  logged: ( 0.06228631744958, 0.92079485384794, 0.30646739768721, -0.23309866138728)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.47516182641474, 0.52933485153609, 0.51597718034511, -0.47727707155339) )
+  logged: ( -0.47516182641474, 0.52933485153609, 0.51597718034511, -0.47727707155339)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.01427558237852, 0.03631781164642, 0.99861671731103, -0.03524026407279) )
+  logged: ( -0.01427558237852, 0.03631781164642, 0.99861671731103, -0.03524026407279)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.11617384489433, 0.74317357411162, 0.56888616878262, -0.3325134635958) )
+  logged: ( 0.11617384489433, 0.74317357411162, 0.56888616878262, -0.3325134635958)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.06692072715107, 0.89768880043554, 0.35201360418793, -0.25644269597084) )
+  logged: ( 0.06692072715107, 0.89768880043554, 0.35201360418793, -0.25644269597084)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.08099522431531, 0.34084990495723, 0.90190475051039, -0.25264389352514) )
+  logged: ( 0.08099522431531, 0.34084990495723, 0.90190475051039, -0.25264389352514)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.21494733617782, 0.50427705583921, 0.76404275051356, -0.3402072442084) )
+  logged: ( 0.21494733617782, 0.50427705583921, 0.76404275051356, -0.3402072442084)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.20458791071138, 0.93238450648132, 0.21207505043421, -0.20934921028672) )
+  logged: ( -0.20458791071138, 0.93238450648132, 0.21207505043421, -0.20934921028672)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.37509203355429, 0.72916540101962, 0.41996093059665, -0.38891721624582) )
+  logged: ( -0.37509203355429, 0.72916540101962, 0.41996093059665, -0.38891721624582)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.48889257040391, 0.51064416016689, 0.51064416016689, -0.48935583983311) )
+  logged: ( -0.48889257040391, 0.51064416016689, 0.51064416016689, -0.48935583983311)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.38482505475733, 0.7024517148757, 0.44432581029301, -0.40130517042104) )
+  logged: ( 0.38482505475733, 0.7024517148757, 0.44432581029301, -0.40130517042104)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.35871603193041, 0.7173541387949, 0.45413458335353, -0.3879273491161) )
+  logged: ( 0.35871603193041, 0.7173541387949, 0.45413458335353, -0.3879273491161)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.07092405574144, 0.15386297108169, 0.97592412129405, -0.13736110775444) )
+  logged: ( -0.07092405574144, 0.15386297108169, 0.97592412129405, -0.13736110775444)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.00643247977284, 0.06044819216037, 0.99652003720511, -0.05703029648569) )
+  logged: ( -0.00643247977284, 0.06044819216037, 0.99652003720511, -0.05703029648569)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.23237715860211, 0.25712836951534, 0.90499922185805, -0.24670278917497) )
+  logged: ( -0.23237715860211, 0.25712836951534, 0.90499922185805, -0.24670278917497)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.14812624639763, 0.94804415314928, 0.20811370202119, -0.18963012903715) )
+  logged: ( 0.14812624639763, 0.94804415314928, 0.20811370202119, -0.18963012903715)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.42006143813277, 0.47466476342413, 0.64229660730474, -0.43092553742168) )
+  logged: ( 0.42006143813277, 0.47466476342413, 0.64229660730474, -0.43092553742168)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.24503864607395, 0.53262838416755, 0.72806395450682, -0.35522661000721) )
+  logged: ( 0.24503864607395, 0.53262838416755, 0.72806395450682, -0.35522661000721)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.17215977785586, 0.56258837271888, 0.73310688233434, -0.34118855907573) )
+  logged: ( 0.17215977785586, 0.56258837271888, 0.73310688233434, -0.34118855907573)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.27546250959756, 0.3617601777837, 0.8328067206403, -0.31572606106001) )
+  logged: ( -0.27546250959756, 0.3617601777837, 0.8328067206403, -0.31572606106001)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.00188823433051, 0.71127724134181, 0.61996476542888, -0.33124735492832) )
+  logged: ( -0.00188823433051, 0.71127724134181, 0.61996476542888, -0.33124735492832)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.11993713831056, 0.69045119979843, 0.62734214739822, -0.33960867722803) )
+  logged: ( 0.11993713831056, 0.69045119979843, 0.62734214739822, -0.33960867722803)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.4333434593987, 0.5674618268317, 0.53953494380361, -0.44620910535312) )
+  logged: ( 0.4333434593987, 0.5674618268317, 0.53953494380361, -0.44620910535312)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.14046789648199, 0.76204281186554, 0.53866496465253, -0.3307560714452) )
+  logged: ( 0.14046789648199, 0.76204281186554, 0.53866496465253, -0.3307560714452)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.27934146772587, 0.83478880464795, 0.35505951579923, -0.3146883160901) )
+  logged: ( 0.27934146772587, 0.83478880464795, 0.35505951579923, -0.3146883160901)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.38950868988043, 0.50043065265232, 0.65252044453553, -0.41481226097688) )
+  logged: ( 0.38950868988043, 0.50043065265232, 0.65252044453553, -0.41481226097688)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.02189719455869, 0.3590160979599, 0.89704584594224, -0.25678143342904) )
+  logged: ( -0.02189719455869, 0.3590160979599, 0.89704584594224, -0.25678143342904)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.25170715768671, 0.87869938110094, 0.29725346786456, -0.27599144962227) )
+  logged: ( -0.25170715768671, 0.87869938110094, 0.29725346786456, -0.27599144962227)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.48701937501657, 0.49746839279471, 0.52702171406392, -0.48742736836768) )
+  logged: ( -0.48701937501657, 0.49746839279471, 0.52702171406392, -0.48742736836768)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.0965468097085, 0.65418731659122, 0.66969848630898, -0.33796687083462) )
+  logged: ( 0.0965468097085, 0.65418731659122, 0.66969848630898, -0.33796687083462)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.44031168585206, 0.62611740844431, 0.46526272885211, -0.44455956101089) )
+  logged: ( 0.44031168585206, 0.62611740844431, 0.46526272885211, -0.44455956101089)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.39760723370006, 0.41065827708756, 0.71570399253805, -0.40129298801993) )
+  logged: ( 0.39760723370006, 0.41065827708756, 0.71570399253805, -0.40129298801993)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.03993915545083, 0.99719678562494, 0.04494391155992, -0.04453627077847) )
+  logged: ( -0.03993915545083, 0.99719678562494, 0.04494391155992, -0.04453627077847)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.34732225422361, 0.36066191588662, 0.79060937642845, -0.35245857636527) )
+  logged: ( 0.34732225422361, 0.36066191588662, 0.79060937642845, -0.35245857636527)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.05418307067951, 0.74925962028559, 0.57334994848678, -0.32702301575187) )
+  logged: ( 0.05418307067951, 0.74925962028559, 0.57334994848678, -0.32702301575187)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.01512982497545, 0.38827023322549, 0.88107160469868, -0.26968526430069) )
+  logged: ( -0.01512982497545, 0.38827023322549, 0.88107160469868, -0.26968526430069)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.24540059051975, 0.30315963690056, 0.87835491872875, -0.27634294178049) )
+  logged: ( 0.24540059051975, 0.30315963690056, 0.87835491872875, -0.27634294178049)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.08817936933254, 0.28267774856483, 0.92872428270174, -0.223134255574) )
+  logged: ( -0.08817936933254, 0.28267774856483, 0.92872428270174, -0.223134255574)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.08104904426887, 0.96732411533499, 0.18087977537941, -0.15810634134398) )
+  logged: ( -0.08104904426887, 0.96732411533499, 0.18087977537941, -0.15810634134398)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.21925298648569, 0.56718822869189, 0.71101107153272, -0.35311315085726) )
+  logged: ( -0.21925298648569, 0.56718822869189, 0.71101107153272, -0.35311315085726)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.08125105477373, 0.61479004537781, 0.70965489502622, -0.33439706363519) )
+  logged: ( -0.08125105477373, 0.61479004537781, 0.70965489502622, -0.33439706363519)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.04684501159737, 0.98005497841687, 0.14463097248487, -0.12798306906316) )
+  logged: ( -0.04684501159737, 0.98005497841687, 0.14463097248487, -0.12798306906316)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.03635232419708, 0.14426659950911, 0.98068946401439, -0.12694026927151) )
+  logged: ( 0.03635232419708, 0.14426659950911, 0.98068946401439, -0.12694026927151)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.10279761444703, 0.50078633423756, 0.79924087383898, -0.3160058915432) )
+  logged: ( 0.10279761444703, 0.50078633423756, 0.79924087383898, -0.3160058915432)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.14731030253742, 0.15281861518377, 0.96542337009424, -0.15134021968907) )
+  logged: ( 0.14731030253742, 0.15281861518377, 0.96542337009424, -0.15134021968907)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.06829953564161, 0.3031700587659, 0.92175128164458, -0.23194323375686) )
+  logged: ( -0.06829953564161, 0.3031700587659, 0.92175128164458, -0.23194323375686)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.07552674540142, 0.27334662492167, 0.93425702452066, -0.21619700623924) )
+  logged: ( -0.07552674540142, 0.27334662492167, 0.93425702452066, -0.21619700623924)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.05324946353, 0.49680472065434, 0.80887800157665, -0.30994506405926) )
+  logged: ( -0.05324946353, 0.49680472065434, 0.80887800157665, -0.30994506405926)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.01990993625924, 0.03040801149932, 0.99889201007958, -0.02989480680641) )
+  logged: ( -0.01990993625924, 0.03040801149932, 0.99889201007958, -0.02989480680641)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.48385970553742, 0.49579428425062, 0.53421218858878, -0.4844431345626) )
+  logged: ( 0.48385970553742, 0.49579428425062, 0.53421218858878, -0.4844431345626)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.43790046866488, 0.53224373274991, 0.56856816818568, -0.44909912782981) )
+  logged: ( 0.43790046866488, 0.53224373274991, 0.56856816818568, -0.44909912782981)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.11202756354434, 0.80312127363408, 0.49305687169716, -0.31518401944722) )
+  logged: ( -0.11202756354434, 0.80312127363408, 0.49305687169716, -0.31518401944722)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.00449367451831, 0.03590531086343, 0.99874320810748, -0.03467880909567) )
+  logged: ( 0.00449367451831, 0.03590531086343, 0.99874320810748, -0.03467880909567)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.03562320544197, 0.95253089846237, 0.23535874767826, -0.18979498043897) )
+  logged: ( -0.03562320544197, 0.95253089846237, 0.23535874767826, -0.18979498043897)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.41521885225851, 0.56944465272748, 0.56041741212609, -0.43503840795394) )
+  logged: ( 0.41521885225851, 0.56944465272748, 0.56041741212609, -0.43503840795394)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.37314912923057, 0.3786146058041, 0.75946194430776, -0.37500435034083) )
+  logged: ( -0.37314912923057, 0.3786146058041, 0.75946194430776, -0.37500435034083)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.37366220824543, 0.70227810440672, 0.4574425186213, -0.3974020135297) )
+  logged: ( -0.37366220824543, 0.70227810440672, 0.4574425186213, -0.3974020135297)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.25577651871049, 0.80382245744705, 0.42327490539364, -0.33058460920636) )
+  logged: ( 0.25577651871049, 0.80382245744705, 0.42327490539364, -0.33058460920636)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.13711782602205, 0.14440538558933, 0.96954700505925, -0.14256363975583) )
+  logged: ( -0.13711782602205, 0.14440538558933, 0.96954700505925, -0.14256363975583)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.17018212260388, 0.1756064878575, 0.95390944937653, -0.17394587939519) )
+  logged: ( -0.17018212260388, 0.1756064878575, 0.95390944937653, -0.17394587939519)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.22017400652755, 0.91981865015175, 0.23192087128961, -0.22730984831916) )
+  logged: ( -0.22017400652755, 0.91981865015175, 0.23192087128961, -0.22730984831916)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.00812530586423, 0.81228726482336, 0.49538120688465, -0.30776750750513) )
+  logged: ( -0.00812530586423, 0.81228726482336, 0.49538120688465, -0.30776750750513)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.4779821180114, 0.50013640195026, 0.5400593574704, -0.47930425067409) )
+  logged: ( -0.4779821180114, 0.50013640195026, 0.5400593574704, -0.47930425067409)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.09958895183933, 0.15814024432383, 0.97165397298529, -0.14478349553263) )
+  logged: ( -0.09958895183933, 0.15814024432383, 0.97165397298529, -0.14478349553263)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.09439134843164, 0.87208612165445, 0.3918976265743, -0.27743885820915) )
+  logged: ( 0.09439134843164, 0.87208612165445, 0.3918976265743, -0.27743885820915)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.07473300779361, 0.78972388124611, 0.51948672833942, -0.31762353189727) )
+  logged: ( -0.07473300779361, 0.78972388124611, 0.51948672833942, -0.31762353189727)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.07271241908472, 0.26596185377372, 0.93766132626203, -0.2115855233248) )
+  logged: ( -0.07271241908472, 0.26596185377372, 0.93766132626203, -0.2115855233248)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.20624764484883, 0.24103912896908, 0.92061975154951, -0.22764296685174) )
+  logged: ( -0.20624764484883, 0.24103912896908, 0.92061975154951, -0.22764296685174)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.33961960499673, 0.78699512311711, 0.37489423729288, -0.35320179916918) )
+  logged: ( 0.33961960499673, 0.78699512311711, 0.37489423729288, -0.35320179916918)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.08864442851309, 0.14599085315791, 0.97615206115582, -0.13399996115322) )
+  logged: ( -0.08864442851309, 0.14599085315791, 0.97615206115582, -0.13399996115322)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.26181367808082, 0.61653575560354, 0.64412012880505, -0.36938668045875) )
+  logged: ( 0.26181367808082, 0.61653575560354, 0.64412012880505, -0.36938668045875)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.14288936526395, 0.34068418313416, 0.89124918869003, -0.26304334303692) )
+  logged: ( -0.14288936526395, 0.34068418313416, 0.89124918869003, -0.26304334303692)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.25739996998504, 0.83461913583351, 0.37326979145868, -0.31277118846948) )
+  logged: ( 0.25739996998504, 0.83461913583351, 0.37326979145868, -0.31277118846948)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.1386247755751, 0.88919692128005, 0.3463783264964, -0.26482836274913) )
+  logged: ( -0.1386247755751, 0.88919692128005, 0.3463783264964, -0.26482836274913)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.17443662603257, 0.51002502853167, 0.77443821740805, -0.33119749574458) )
+  logged: ( 0.17443662603257, 0.51002502853167, 0.77443821740805, -0.33119749574458)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.24108065442513, 0.39849956222526, 0.82645509556372, -0.3163071165576) )
+  logged: ( 0.24108065442513, 0.39849956222526, 0.82645509556372, -0.3163071165576)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.14495320794677, 0.20128551643111, 0.95104379987431, -0.18435942910964) )
+  logged: ( 0.14495320794677, 0.20128551643111, 0.95104379987431, -0.18435942910964)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.03895127503676, 0.15103554312796, 0.97887539647879, -0.13218933789662) )
+  logged: ( 0.03895127503676, 0.15103554312796, 0.97887539647879, -0.13218933789662)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.16677584951714, 0.51726139643278, 0.77131590832109, -0.3312072362571) )
+  logged: ( 0.16677584951714, 0.51726139643278, 0.77131590832109, -0.3312072362571)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.14342506731688, 0.53489498978983, 0.76425606553235, -0.33049851173628) )
+  logged: ( 0.14342506731688, 0.53489498978983, 0.76425606553235, -0.33049851173628)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (0.16509337455849, 0.76780932576558, 0.52246473049544, -0.33202955039068) )
+  logged: ( 0.16509337455849, 0.76780932576558, 0.52246473049544, -0.33202955039068)
+
+./modules/many_bone_ik/tests/test_ik_quaternion.h:0: SUCCESS: CHECK( Quaternion() != f ) is correct!
+  values: CHECK( (0, 0, 0, 1) != (-0.17342476870175, 0.78190491474857, 0.50054818172551, -0.32863364353646) )
+  logged: ( -0.17342476870175, 0.78190491474857, 0.50054818172551, -0.32863364353646)

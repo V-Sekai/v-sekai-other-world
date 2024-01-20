@@ -50,6 +50,27 @@ void IKKusudama3D::update_tangent_radii() {
 	}
 }
 
+// public
+// double getTwistRatio(AbstractAxes toGet, AbstractAxes twistAxes) {
+// 	Rot globTwistCent = new Rot();
+// 	twistAxes.getGlobalMBasis().applyTo(twistCentRot, globTwistCent); // create a temporary orientation representing globalOf((0,0,1)) represents the center of the allowable twist range in global space
+// 	Rot centAlignRot = globTwistCent.applyInverseTo(toGet.getGlobalMBasis().rotation);
+// 	Rot[] centDecompRot = centAlignRot.getSwingTwist(new SGVec_3d(0, 1, 0));
+// 	SGVec_3d locZ = centDecompRot[1].applyToCopy(new SGVec_3d(0, 0, 1)); // because we only care about orientation
+// 	SGVec_3d loctwistMaxVec = (SGVec_3d)twistCentRot.getInverse().applyToCopy(twistMaxVec);
+// 	SGVec_3d loctwistMinVec = (SGVec_3d)twistCentRot.getInverse().applyToCopy(twistMinVec);
+// 	Rot toMax = new Rot(locZ, loctwistMaxVec);
+// 	Rot fromMin = new Rot(locZ, loctwistMinVec);
+// 	double toMaxAngle = toMax.getAngle();
+// 	double minToAngle = fromMin.getAngle();
+// 	double absRange = Math.abs(range);
+// 	if (minToAngle > toMaxAngle) {
+// 		return ((absRange / 2d) + centDecompRot[1].getAngle()) / Math.abs(absRange);
+// 	} else {
+// 		return ((absRange / 2d) - centDecompRot[1].getAngle()) / Math.abs(absRange);
+// 	}
+// }
+
 void IKKusudama3D::set_axial_limits(real_t min_angle, real_t in_range) {
 	min_axial_angle = min_angle;
 	range_angle = in_range;
@@ -57,19 +78,78 @@ void IKKusudama3D::set_axial_limits(real_t min_angle, real_t in_range) {
 	Vector3 z_axis = Vector3(0.0f, 0.0f, 1.0f);
 	twist_min_rot = Quaternion(y_axis, min_axial_angle);
 	twist_min_vec = twist_min_rot.xform(z_axis).normalized();
-	twist_center_vec = twist_min_rot.xform(twist_min_vec).normalized();
-	twist_center_rot = Quaternion(z_axis, twist_center_vec);
+
 	twist_half_range_half_cos = Math::cos(in_range / real_t(4.0)); // For the quadrance angle. We need half the range angle since starting from the center, and half of that since quadrance takes cos(angle/2).
-	twist_max_vec = Quaternion(y_axis, in_range).xform(twist_min_vec).normalized();
-	twist_max_rot = Quaternion(z_axis, twist_max_vec);
+	twist_range_rot = Quaternion(y_axis, in_range);
+
+	twist_max_vec = twist_range_rot.xform(twist_min_vec).normalized();
+
+	twist_half_range_rot = Quaternion(y_axis, range_angle / 2);
+	twist_center_vec = twist_half_range_rot.xform(twist_min_vec);
+	twist_center_rot = Quaternion(z_axis, twist_center_vec);
+
+	// twist_min_rot.xform(twist_min_vec).normalized();
+	// twist_max_rot = Quaternion(z_axis, twist_max_vec);
+
+	/**
+		minAxialAngle = minAngle; --
+		range = inRange; --
+		Vec3d<?> y_axis = new SGVec_3d(0,1,0); --
+		Vec3d<?> z_axis = new SGVec_3d(0,0,1); --
+		twistMinRot = new Rot(y_axis, minAxialAngle);
+ --		twistMinVec = twistMinRot.applyToCopy(z_axis); --
+;
+
+		twistHalfRangeHalfCos = Math.cos(inRange/4); -- //for quadrance angle. We need half the range angle since starting from the center, and half of that since quadrance takes cos(angle/2)
+		twistRangeRot = new Rot(y_axis, range--);
+
+		twistMaxVec = twistRangeRot.applyToCopy(twistMinVec --);
+
+		twistHalfRangeRot = new Rot(y_axis, range/2 --);
+		twistCenterVec = twistHalfRangeRot.applyToCopy(twistMinVec --);
+		twistCentRot = new Rot(new SGVec_3d(0,0,1), twistCenterVec --);
+		constraintUpdateNotification();
+
+
+
+		constraintUpdateNotification();
+		*/
+	// for chirality agnosticism:
+	/*AbstractBasis globBasis = twistAxes.getGlobalMBasis();
+	globBasis.applyTo(twistMinVec, twistMinVec);
+	globBasis.applyTo(twistCenterVec, twistCenterVec);
+	globBasis.applyTo(twistMaxVec, twistMaxVec);
+	Vec3d<?> gz_axis = new SGVec_3d(0,0,1);*/
 }
 
-void IKKusudama3D::set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKNode3D> to_set, Ref<IKNode3D> constraint_axes, real_t p_dampening, real_t p_cos_half_dampen) {
+void IKKusudama3D::set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKNode3D> to_set, Ref<IKNode3D> twist_axes, real_t p_dampening, real_t p_cos_half_dampen) {
 	if (!is_axially_constrained()) {
 		return;
 	}
 
-	Transform3D global_transform_constraint = constraint_axes->get_global_transform();
+	/**
+	if(!axiallyConstrained) return 0d;
+	Rot globTwistCent = twistAxes.getGlobalMBasis().rotation.applyTo(twistCentRot);//create a temporary orientation representing globalOf((0,0,1)) represents the middle of the allowable twist range in global space
+	Rot alignRot = globTwistCent.applyInverseTo(toSet.getGlobalMBasis().rotation);
+	Rot[] decomposition = alignRot.getSwingTwist(new SGVec_3d(0,1,0)); //decompose the orientation to a swing and twist away from globTwistCent's global basis
+	decomposition[1].rotation.clampToQuadranceAngle(twistHalfRangeHalfCos);
+	Rot recomposition = decomposition[0].applyTo(decomposition[1]);
+	toSet.getParentAxes().getGlobalMBasis().inverseRotation.applyTo(globTwistCent.applyTo(recomposition), toSet.localMBasis.rotation);
+		toSet.localMBasis.refreshPrecomputed();
+	toSet.markDirty();
+	return 0;
+	*/
+
+	// Quaternion global_twist_center = twist_axes->get_global_transform().basis.get_quaternion * * twist_center_ro // SKEPTICALt;
+	// Quaternion align_rotation = global_twist_center.inverse() * to_set->get_global_transform().basis.get_rotation_quaternion();
+	// Quaternion swing;
+	// Quaternion twist;
+	// get_swing_twist(align_rotation, Vector3(0, 1, 0), swing, twist); // decompose the orientation to a swing and twist away from globTwistCent's global basis
+	// twist = clamp_to_quadrance_angle(twist, twist_half_range_half_cos);
+	// Quaternion recomposition = swing * twist;
+	// to_set->.getParentAxes().getGlobalMBasis().inverseRotation.applyTo(globTwistCent.applyTo(recomposition), toSet.localMBasis.rotation);
+
+	Transform3D global_transform_constraint = twist_axes->get_global_transform();
 	Quaternion global_twist_center = twist_center_rot;
 
 	if (global_transform_constraint.basis.is_orthogonal() && Math::is_equal_approx(global_transform_constraint.basis.determinant(), real_t(1.0))) {
@@ -111,6 +191,16 @@ void IKKusudama3D::set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKN
 
 	Transform3D ik_transform = to_set->get_transform();
 	to_set->set_transform(Transform3D(rotation, ik_transform.origin));
+}
+
+Quaternion IKKusudama3D::applyTo(Quaternion thisQ, Quaternion target) {
+	Quaternion r = target;
+	Quaternion tr = thisQ;
+	Quaternion result = Quaternion(
+			r.w * tr.w - (r.x * tr.x + r.y * tr.y + r.z * tr.z),
+			r.x * tr.w + r.w * tr.x + (r.y * tr.z - r.z * tr.y),
+			r.y * tr.w + r.w * tr.y + (r.z * tr.x - r.x * tr.z),
+			r.z * tr.w + r.w * tr.z + (r.x * tr.y - r.y * tr.x));
 }
 
 void IKKusudama3D::get_swing_twist(

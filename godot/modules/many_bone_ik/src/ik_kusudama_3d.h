@@ -61,6 +61,8 @@ class IKKusudama3D : public Resource {
 	Vector3 twist_center_vec;
 	Quaternion twist_center_rot;
 	Quaternion twist_max_rot;
+	Quaternion twist_half_range_rot;
+	Quaternion twist_range_rot;
 	real_t twist_half_range_half_cos = 0;
 	Vector3 twist_tan;
 	bool flipped_bounds = false;
@@ -113,6 +115,8 @@ public:
 			Quaternion &r_swing,
 			Quaternion &r_twist);
 
+	static Quaternion applyTo(Quaternion p_thisQ, Quaternion p_target);
+
 public:
 	double angle_to_twist_center(Ref<IKNode3D> bone_direction, Ref<IKNode3D> limiting_axes);
 	/**
@@ -144,7 +148,7 @@ public:
 	 * @param limiting_axes
 	 * @return radians of the twist required to snap bone into twist limits (0 if bone is already in twist limits)
 	 */
-	void set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKNode3D> to_set, Ref<IKNode3D> limiting_axes, real_t p_dampening, real_t p_cos_half_dampen);
+	void set_snap_to_twist_limit(Ref<IKNode3D> bone_direction, Ref<IKNode3D> to_set, Ref<IKNode3D> twist_axes, real_t p_dampening, real_t p_cos_half_dampen);
 
 	/**
 	 * Given a point (in local coordinates), checks to see if a ray can be extended from the Kusudama's
