@@ -45,7 +45,9 @@ Copyright NVIDIA Corporation 2006 -- Ignacio Castano <icastano@nvidia.com>
 */
 
 #include "core/core_bind.h"
+#include "core/error/error_macros.h"
 #include "core/io/image.h"
+#include "core/math/math_funcs.h"
 #include "core/math/vector2.h"
 #include "core/math/vector3.h"
 #include "core/os/os.h"
@@ -80,6 +82,7 @@ void SceneMerge::merge(const String p_file, Node *p_root_node) {
 	ResourceSaver::save(scene, p_file);
 }
 
+
 bool MeshMergeMaterialRepack::setAtlasTexel(void *param, int x, int y, const Vector3 &bar, const Vector3 &, const Vector3 &, float) {
     SetAtlasTexelArgs *args = static_cast<SetAtlasTexelArgs *>(param);
     if (args->sourceTexture.is_valid()) {
@@ -103,7 +106,7 @@ bool MeshMergeMaterialRepack::setAtlasTexel(void *param, int x, int y, const Vec
         const Color color = args->sourceTexture->get_pixel(sx, sy);
         args->atlasData->set_pixel(x, y, color);
 
-        AtlasLookupTexel &lookup = args->atlas_lookup[x * y + args->atlas_width];
+        AtlasLookupTexel &lookup = args->atlas_lookup[x + y * args->atlas_width];
         lookup.material_index = args->material_index;
         lookup.x = static_cast<uint16_t>(sx);
         lookup.y = static_cast<uint16_t>(sy);
@@ -190,7 +193,7 @@ Node *MeshMergeMaterialRepack::_merge_list(MeshMergeState p_mesh_merge_state, in
 
 	Vector<Vector<Vector2> > uv_groups;
 	Vector<Vector<ModelVertex> > model_vertices;
-	scale_uvs_by_texture_dimension_larger(original_mesh_items, mesh_items, uv_groups, mesh_to_index_to_material, model_vertices);
+	process_uvs_by_texture_dimensions(original_mesh_items, mesh_items, uv_groups, mesh_to_index_to_material, model_vertices);
 	xatlas::Atlas *atlas = xatlas::Create();
 
 	int32_t num_surfaces = 0;
@@ -417,16 +420,16 @@ void MeshMergeMaterialRepack::_generate_atlas(const int32_t p_num_meshes, Vector
 		}
 	}
 	pack_options.bilinear = true;
-	pack_options.padding = 16;
-	pack_options.texelsPerUnit = 0.0f;
-	pack_options.bruteForce = false;
+	pack_options.padding = 64;
+	pack_options.texelsPerUnit = 1.0f / ;
+	pack_options.bruteForce = true;
 	pack_options.blockAlign = true;
-	pack_options.resolution = 2048;
+	pack_options.resolution = 0;
 	xatlas::ComputeCharts(atlas);
 	xatlas::PackCharts(atlas, pack_options);
 }
 
-void MeshMergeMaterialRepack::scale_uvs_by_texture_dimension_larger(const Vector<MeshState> &original_mesh_items, Vector<MeshState> &mesh_items, Vector<Vector<Vector2> > &uv_groups, Array &r_mesh_to_index_to_material, Vector<Vector<ModelVertex> > &r_model_vertices) {
+void MeshMergeMaterialRepack::process_uvs_by_texture_dimensions(const Vector<MeshState> &original_mesh_items, Vector<MeshState> &mesh_items, Vector<Vector<Vector2> > &uv_groups, Array &r_mesh_to_index_to_material, Vector<Vector<ModelVertex> > &r_model_vertices) {
 	int32_t total_surface_count = 0;
 	for (int32_t mesh_i = 0; mesh_i < mesh_items.size(); mesh_i++) {
 		total_surface_count += mesh_items[mesh_i].mesh->get_surface_count();
@@ -562,18 +565,20 @@ void MeshMergeMaterialRepack::map_mesh_to_index_to_material(Vector<MeshState> me
 	float largest_dimension = 0;
 	for (int32_t mesh_i = 0; mesh_i < mesh_items.size(); mesh_i++) {
 		Ref<ArrayMesh> array_mesh = mesh_items[mesh_i].mesh;
+		ERR_CONTINUE(array_mesh.is_null());
 		for (int32_t j = 0; j < array_mesh->get_surface_count(); j++) {
 			Ref<BaseMaterial3D> mat = array_mesh->surface_get_material(j);
 			Ref<Texture2D> texture = mat->get_texture(BaseMaterial3D::TEXTURE_ALBEDO);
 			if (texture.is_valid()) {
-				largest_dimension = MAX(texture->get_size().x, texture->get_size().y);
+				largest_dimension = MAX(MAX(texture->get_size().x, largest_dimension), texture->get_size().y);
 			}
 		}
 	}
 	largest_dimension = MAX(largest_dimension, default_texture_length);
 	for (int32_t mesh_i = 0; mesh_i < mesh_items.size(); mesh_i++) {
 		Ref<ArrayMesh> array_mesh = mesh_items[mesh_i].mesh;
-		array_mesh->lightmap_unwrap(Transform3D(), 1.0f / largest_dimension, true);
+		ERR_CONTINUE(array_mesh.is_null());
+		array_mesh->lightmap_unwrap(Transform3D(), TEXELS_PER_UNIT, true);
 		for (int32_t j = 0; j < array_mesh->get_surface_count(); j++) {
 			Array mesh = array_mesh->surface_get_arrays(j);
 			Vector<Vector3> indices = mesh[ArrayMesh::ARRAY_INDEX];
@@ -644,9 +649,9 @@ Node *MeshMergeMaterialRepack::_output(MergeState &state, int p_count) {
 	mat.instantiate();
 	mat->set_name("Atlas");
 	HashMap<String, Ref<Image> >::Iterator A = state.texture_atlas.find("albedo");
-	Image::CompressMode compress_mode = Image::COMPRESS_ETC;
+	Image::CompressMode compress_mode = Image::COMPRESS_BPTC;
 	if (Image::_image_compress_bc_func) {
-		compress_mode = Image::COMPRESS_S3TC;
+		compress_mode = Image::COMPRESS_BPTC;
 	}
 	if (A && !A->key.is_empty()) {
 		Ref<Image> img = dilate(A->value);
